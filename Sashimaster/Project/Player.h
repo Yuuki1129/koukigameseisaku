@@ -46,6 +46,12 @@ public:
 	~CPlayer();
 	bool Load(void);
 	void Initialize(void);
+	float getposx() {
+		return m_PosX;
+	}
+	float getposy() {
+		return m_PosY;
+	}
 	void Update(void);
 	void UpdateKey(void);
 	void UpdateMove(void);

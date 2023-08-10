@@ -1,4 +1,8 @@
 #include "ObjectBase.h"
+/*作った人　碇
+* ゲーム中のオブジェクトのスーパークラス。
+
+*/
 
 bool CObjectBase::Load() {
 

@@ -1,19 +1,33 @@
 #include "Game.h"
 #include "GameDefine.h"
 
+
+CGame* G_Cgame;
 CGame::CGame() :CSceneBase(), pfont()
-{}
+{
+	G_Cgame = this;
+	addobject();
+}
 
 bool CGame::Load()
 {
+	for (int i = 0; playerobjitem.size() > i; i++) {
+		playerobjitem[i]->Load();
+	}
 	//プレイヤーの素材読み込み
 	m_Player.Load();
 	//ステージの素材読み込み
 	m_Stage.Load("Stage1.txt");
 	return true;
 }
+Vector2 CGame::getplayerpositon() {
+	return Vector2(m_Player.getposx(), m_Player.getposy());
+}
 void CGame::Initialize()
 {
+	for (int i = 0; playerobjitem.size() > i; i++) {
+		playerobjitem[i]->Initialize();
+	}
 	//プレイヤーの状態初期化
 	m_Player.Initialize();
 	//ステージの状態初期化
@@ -21,7 +35,12 @@ void CGame::Initialize()
 	pfont.Create(64, "MS ゴシック");
 }
 void CGame::Update()
-{//プレイヤーの更新
+{
+	for (int i = 0; playerobjitem.size() > i; i++) {
+		playerobjitem[i]->Update();
+	}
+	
+	//プレイヤーの更新
 	m_Player.Update();
 	//ステージとプレイヤーの当たり判定
 	float ox = 0, oy = 0;
@@ -39,8 +58,12 @@ void CGame::Update()
 }
 void CGame::Render()
 {
+
 	//ステージの描画
 	m_Stage.Render();
+	for (int i = 0; playerobjitem.size() > i; i++) {
+		playerobjitem[i]->Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
+	}
 	//プレイヤーの描画
 	m_Player.Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
 
@@ -51,9 +74,17 @@ void CGame::Render()
 }
 void CGame::Release()
 {
+
 	//ステージの解放
 	m_Stage.Release();
 	//プレイヤーの解放
 	m_Player.Release();
+	for (int i = 0; playerobjitem.size() > i; i++) {
+		playerobjitem[i]->Release();
+	}
 	background.Release();
+}
+void CGame::addobject() {
+	auto aa = new CSashiobj();
+	playerobjitem.push_back(aa);
 }

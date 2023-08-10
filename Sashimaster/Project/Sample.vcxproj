@@ -98,6 +98,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="SashimasterApp.cpp" />
+    <ClCompile Include="Sashiobjcpp.cpp" />
     <ClCompile Include="SceneBase.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Title.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="result.h" />
     <ClInclude Include="SashimasterApp.h" />
     <ClInclude Include="Sashimasterdefine.h" />
+    <ClInclude Include="Sashiobj.h" />
     <ClInclude Include="SceneBase.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Title.h" />
