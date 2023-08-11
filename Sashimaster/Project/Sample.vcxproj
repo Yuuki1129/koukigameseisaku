@@ -111,6 +111,7 @@
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameSelect.h" />
     <ClInclude Include="ObjectBase.h" />
+    <ClInclude Include="ObjectDeta.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="result.h" />

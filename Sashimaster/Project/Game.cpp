@@ -11,9 +11,8 @@ CGame::CGame() :CSceneBase(), pfont()
 
 bool CGame::Load()
 {
-	for (int i = 0; playerobjitem.size() > i; i++) {
-		playerobjitem[i]->Load();
-	}
+	
+	m_Sashiobj.Load();
 	//プレイヤーの素材読み込み
 	m_Player.Load();
 	//ステージの素材読み込み
@@ -25,9 +24,9 @@ Vector2 CGame::getplayerpositon() {
 }
 void CGame::Initialize()
 {
-	for (int i = 0; playerobjitem.size() > i; i++) {
-		playerobjitem[i]->Initialize();
-	}
+	//サシの状態初期化
+	m_Sashiobj.Initialize();
+	
 	//プレイヤーの状態初期化
 	m_Player.Initialize();
 	//ステージの状態初期化
@@ -36,9 +35,9 @@ void CGame::Initialize()
 }
 void CGame::Update()
 {
-	for (int i = 0; playerobjitem.size() > i; i++) {
-		playerobjitem[i]->Update();
-	}
+	//サシの更新
+	m_Sashiobj.Update();
+	
 	
 	//プレイヤーの更新
 	m_Player.Update();
@@ -61,9 +60,9 @@ void CGame::Render()
 
 	//ステージの描画
 	m_Stage.Render();
-	for (int i = 0; playerobjitem.size() > i; i++) {
-		playerobjitem[i]->Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
-	}
+	
+	m_Sashiobj.Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
+	
 	//プレイヤーの描画
 	m_Player.Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
 
@@ -79,12 +78,11 @@ void CGame::Release()
 	m_Stage.Release();
 	//プレイヤーの解放
 	m_Player.Release();
-	for (int i = 0; playerobjitem.size() > i; i++) {
-		playerobjitem[i]->Release();
-	}
+	//サシオブジェクトの解放
+	m_Sashiobj.Release();
 	background.Release();
 }
 void CGame::addobject() {
-	auto aa = new CSashiobj();
-	playerobjitem.push_back(aa);
+	auto aa = new ObjectDeta();
+	m_Sashiobj.AddObject(aa);
 }

@@ -3,25 +3,39 @@
 
 extern CGame* G_Cgame;
 void  CSashiobj::Initialize() {
-	m_rot = MOF_MATH_HALFPI;
+	for (int i = 0; objDetavector.size() > i; i++) {
+		objDetavector[i]->m_rot = MOF_MATH_HALFPI;
+	}
+	
 }
 void  CSashiobj::Update() {
+	for (int i = 0; objDetavector.size() > i; i++) {
+		objDetavector[i]->m_PosX += objDetavector[i]->m_MoveX;
 
-	m_PosX += m_MoveX;
-	m_PosY += m_MoveY;
-	Vector2 tmpvec2 = G_Cgame->getplayerpositon();
-	m_PosX = tmpvec2.x;
-	m_PosY= tmpvec2.y;
-	//m_rot+=0.1f;
+		objDetavector[i]->m_PosY += objDetavector[i]->m_MoveY;
+		Vector2 tmpvec2 = G_Cgame->getplayerpositon();
+		objDetavector[i]->m_PosX = tmpvec2.x;
+		objDetavector[i]->m_PosY = tmpvec2.y;
+		//m_rot+=0.1f;
+	}
+
+	
 }
 void  CSashiobj::Render(float wx, float wy) {
-	//•`‰æˆÊ’u
-	float px = m_PosX - wx;
-	float py = m_PosY - wy;
-	//”½“]ƒtƒ‰ƒO‚ªON‚Ìê‡•`‰æ‹éŒ`‚ð”½“]‚³‚¹‚é
-	if (m_bReverse)
-	{
+	for (int i = 0; objDetavector.size() > i; i++) {
+		//•`‰æˆÊ’u
+		float px = objDetavector[i]->m_PosX - wx;
+		float py = objDetavector[i]->m_PosY - wy;
+		//”½“]ƒtƒ‰ƒO‚ªON‚Ìê‡•`‰æ‹éŒ`‚ð”½“]‚³‚¹‚é
+		if (objDetavector[i]->m_bReverse)
+		{
+		}
+		//ƒeƒNƒXƒ`ƒƒ‚Ì•`‰æ
+		m_Texture.RenderRotate(px, py, objDetavector[i]->m_rot);
 	}
-	//ƒeƒNƒXƒ`ƒƒ‚Ì•`‰æ
-	m_Texture.RenderRotate(px, py, m_rot);
+	
+}
+
+void CSashiobj::AddObject(ObjectDeta* tmpdeta) {
+	objDetavector.push_back(tmpdeta);
 }

@@ -3,7 +3,7 @@
 
 
 /*作った人　碇
-* ゲーム中のオブジェクトのスーパークラス。
+* ゲーム中のサシのオブジェクト。
 
 */
 
@@ -19,5 +19,5 @@ public:
 	 void Initialize(void);
 	 void Update(void);
 	 void Render(float wx, float wy);
-	
+	 void AddObject(ObjectDeta* tmpobjdeta);
 };

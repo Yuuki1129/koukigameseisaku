@@ -8,13 +8,14 @@
 class CGame : public CSceneBase
 {
 private:
-	//ゲームオブジェクト可変配列
-	std::vector<CSashiobj*> playerobjitem;
+
 	CFont	pfont;
 	//プレイヤー
 	CPlayer		m_Player;
 	//ステージ
 	CStage		m_Stage;
+	//サシのオブジェクト
+	CSashiobj  m_Sashiobj;
 public:
 	CGame();
 	bool Load(void);

@@ -12,19 +12,26 @@ void CObjectBase::Initialize() {
 
  }
 void CObjectBase::Update() {
-	m_PosX += m_MoveX;
-	m_PosY += m_MoveY;
+	for (int i = 0; objDetavector.size() > i; i++) {
+		objDetavector[i]->m_PosX += objDetavector[i]->m_MoveX;
+		objDetavector[i]->m_PosY += objDetavector[i]->m_MoveY;
+	}
 }
 void CObjectBase::Render(float wx, float wy) {
-	//描画位置
-	float px = m_PosX - wx;
-	float py = m_PosY - wy;
-	//反転フラグがONの場合描画矩形を反転させる
-	if (m_bReverse)
-	{
+	for (int i = 0; objDetavector.size() > i; i++) {
+		
+		//描画位置
+		float px = objDetavector[i]->m_PosX - wx;
+		float py = objDetavector[i]->m_PosY - wy;
+		//反転フラグがONの場合描画矩形を反転させる
+		if (objDetavector[i]->m_bReverse)
+		{
+		}
+		//テクスチャの描画
+		m_Texture.RenderRotate(px, py, objDetavector[i]->m_rot);
+	
 	}
-	//テクスチャの描画
-	m_Texture.RenderRotate(px, py, m_rot);
+	
 }
 void CObjectBase::Release() {
 	m_Texture.Release();
