@@ -23,6 +23,12 @@ void CTitle::Update()
 		m_bEndScene = true;
 		m_NextScene = gameselectscene;
 	}
+	if (g_pInput->IsKeyPush(MOFKEY_T))
+	{
+		m_bEndScene = true;
+		m_NextScene = optionscene;
+	}
+
 }
 void CTitle::Render()
 {
