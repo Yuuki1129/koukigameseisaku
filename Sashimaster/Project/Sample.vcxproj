@@ -114,6 +114,7 @@
     <ClInclude Include="ObjectDeta.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="rectpoint.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="SashimasterApp.h" />
     <ClInclude Include="Sashimasterdefine.h" />

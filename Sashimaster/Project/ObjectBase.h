@@ -7,6 +7,16 @@
 * ゲーム中のオブジェクトのスーパークラス。
 
 */
+class Rectpoint {
+public: 
+	Vector2*                 point[4];
+	Rectpoint(Vector2* a, Vector2* b, Vector2* c, Vector2* d) {
+		point[0] = a;
+		point[1] = b;
+		point[2] = c;
+		point[3] = d;
+}
+};//４つのポイントのベクトル配列を纏めるクラス
 
 class CObjectBase {
 protected:
@@ -22,5 +32,8 @@ public:
 	virtual void Initialize(void);
 	virtual void Update(void);
 	virtual void Render(float wx, float wy);
+	virtual std::vector<Rectpoint> Getrectvec();
 	virtual void Release(void);
 };
+
+
