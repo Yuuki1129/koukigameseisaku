@@ -35,7 +35,7 @@ void CGame::Initialize()
 void CGame::Update()
 {
 	//サシの更新
-	m_Sashiobj.Update();
+	m_Sashiobj.Update(m_Stage.GetScrollX(), m_Stage.GetScrollY());
 	
 	
 	//プレイヤーの更新
@@ -57,10 +57,15 @@ void CGame::Update()
 void CGame::Render()
 {
 
-	//ステージの描画
+	//ステージの背景描画
+	m_Stage.Renderback();
+	//サシの描画
+	m_Sashiobj.Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
+
+	//ステージの位置描画
 	m_Stage.Render();
 	
-	m_Sashiobj.Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
+	
 	
 	//プレイヤーの描画
 	m_Player.Render(m_Stage.GetScrollX(), m_Stage.GetScrollY());
@@ -83,11 +88,8 @@ void CGame::Release()
 }
 void CGame::addobject() {
 	auto aa = new ObjectDeta();
-	aa->m_MoveX = 1;
-	aa->m_MoveY = 1;
-	aa->m_rot = atan(aa->m_MoveY / aa->m_MoveX);
+	aa->m_PosX = -10000;	
 	aa->m_objmode = getplayer;
-
 	m_Sashiobj.AddObject(aa);
 }
 //サシを追加するメソッド

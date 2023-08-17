@@ -282,13 +282,7 @@ void CStage::Render(void){
 	int sch = g_pGraphics->GetTargetHeight();
 	int wn = m_BackTexture.GetWidth();
 	int hn = m_BackTexture.GetHeight();
-	for(float y = ((int)-m_ScrollY % hn) - hn;y < sch;y += hn)
-	{
-		for(float x = ((int)-m_ScrollX % wn) - wn;x < scw;x += wn)
-		{
-			m_BackTexture.Render(x,y);
-		}
-	}
+	
 
 	//テクスチャの横幅からマップチップの縦オフセットを求める
 	int tcx = m_ChipTexture.GetWidth() / m_ChipSize;
@@ -310,6 +304,23 @@ void CStage::Render(void){
 			m_ChipTexture.Render(-m_ScrollX + x * m_ChipSize,-m_ScrollY + y * m_ChipSize,cr);
 		}
 	}
+}
+
+//描画を二段階にずらしている
+void CStage::Renderback(void) {
+	//遠景の描画
+	int scw = g_pGraphics->GetTargetWidth();
+	int sch = g_pGraphics->GetTargetHeight();
+	int wn = m_BackTexture.GetWidth();
+	int hn = m_BackTexture.GetHeight();
+	for (float y = ((int)-m_ScrollY % hn) - hn; y < sch; y += hn)
+	{
+		for (float x = ((int)-m_ScrollX % wn) - wn; x < scw; x += wn)
+		{
+			m_BackTexture.Render(x, y);
+		}
+	}
+
 }
 
 /**

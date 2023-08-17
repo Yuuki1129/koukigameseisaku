@@ -37,7 +37,7 @@ public:
 	
 	virtual bool Load(void);
 	virtual void Initialize(void);
-	virtual void Update(void);
+	virtual void Update(float wx, float wy);
 	virtual void Render(float wx, float wy);
 	virtual std::vector<Rectpoint> Getrectvec();
 	virtual void Release(void);

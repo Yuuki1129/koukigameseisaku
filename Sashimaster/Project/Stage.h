@@ -25,6 +25,7 @@ public:
 	void Update(CPlayer& pl);
 	bool Collision(CRectangle r,float& ox,float& oy);
 	void Render(void);
+	void Renderback(void);
 	void RenderDebug(void);
 	void Release(void);
 	float GetScrollX(){ return m_ScrollX; }

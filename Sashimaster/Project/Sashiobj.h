@@ -1,6 +1,6 @@
 #pragma once
 #include "ObjectBase.h"
-
+#define SASHI_SUPEED  20//サシの移動速度(仮）
 
 /*作った人　碇
 * ゲーム中のサシのオブジェクト。
@@ -17,7 +17,7 @@ public:
 	}
 	
 	 void Initialize(void);
-	 void Update(void);
+	 void Update(float wx, float wy);
 	 void Render(float wx, float wy);
 	 void AddObject(ObjectDeta* tmpobjdeta);
 	 void  moveingsashiobject(void);

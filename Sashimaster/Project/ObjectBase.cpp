@@ -11,7 +11,7 @@ bool CObjectBase::Load() {
 void CObjectBase::Initialize() {
 
  }
-void CObjectBase::Update() {
+void CObjectBase::Update(float wx, float wy) {
 	for (int i = 0; objDetavector.size() > i; i++) {
 		objDetavector[i]->m_PosX += objDetavector[i]->m_MoveX;
 		objDetavector[i]->m_PosY += objDetavector[i]->m_MoveY;

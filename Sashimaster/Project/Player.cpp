@@ -151,7 +151,7 @@ void CPlayer::UpdateKey(void){
 	//キーボードでの移動
 	//入力で直接座標を動かすのではなく、速度を変化させる。
 	//攻撃中は移動できないようにする
-	if(g_pInput->IsKeyHold(MOFKEY_LEFT))
+	if(g_pInput->IsKeyHold(MOFKEY_LEFT)|| g_pInput->IsKeyHold(MOFKEY_A))
 	{
 		m_MoveX -= PLAYER_SPEED;
 		m_bReverse = true;
@@ -165,7 +165,7 @@ void CPlayer::UpdateKey(void){
 			m_Motion.ChangeMotion(MOTION_MOVE);
 		}
 	}
-	else if(g_pInput->IsKeyHold(MOFKEY_RIGHT))
+	else if(g_pInput->IsKeyHold(MOFKEY_RIGHT) || g_pInput->IsKeyHold(MOFKEY_D))
 	{
 		m_MoveX += PLAYER_SPEED;
 		m_bReverse = false;
@@ -180,20 +180,20 @@ void CPlayer::UpdateKey(void){
 		}
 	}
 	//上キーでジャンプ
-	if(g_pInput->IsKeyHold(MOFKEY_UP) && !m_bJump)
+	if((g_pInput->IsKeyHold(MOFKEY_UP)|| g_pInput->IsKeyHold(MOFKEY_W)) && !m_bJump)
 	{
 		m_bJump = true;
 		m_MoveY = PLAYER_JUMP;
 		m_Motion.ChangeMotion(MOTION_JUMPSTART);
 	}
 	//SPACEキーで攻撃
-	if(g_pInput->IsKeyPush(MOFKEY_SPACE))
+	if(g_pInput->IsMouseKeyPush(MOFMOUSE_LBUTTON))
 	{
 		G_Cgame->addobject();
 		m_Motion.ChangeMotion(MOTION_ATTACK);
 		
 	}
-	else if (g_pInput->IsKeyPull(MOFKEY_SPACE)) {
+	else if (g_pInput->IsMouseKeyPull(MOFMOUSE_LBUTTON)) {
 		G_Cgame->moveingsashiobject();
 		m_Motion.ChangeMotion(MOTION_ATTACK);
 	}
