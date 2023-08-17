@@ -1,4 +1,4 @@
-#include	"Player.h"
+#include "Game.h"
 
 /**
  * コンストラクタ
@@ -16,6 +16,8 @@ m_bJump(false) ,
 m_bReverse(false) ,
 m_SrcRect() {
 }
+
+extern CGame* G_Cgame;
 
 /**
  * デストラクタ
@@ -99,7 +101,16 @@ void CPlayer::Update(void){
 	//移動フラグ、このフレームでの移動があったかを保存
 	m_bMove = false;
 	//攻撃中、着地の場合の動作
-	if(m_Motion.GetMotionNo() == MOTION_ATTACK || m_Motion.GetMotionNo() == MOTION_JUMPEND)
+	if (m_Motion.GetMotionNo() == MOTION_ATTACK)
+	{
+		//終了で待機に戻す
+		if (m_Motion.IsEndMotion())
+		{
+			m_Motion.ChangeMotion(MOTION_WAIT);
+		}
+	}
+	
+	if( m_Motion.GetMotionNo() == MOTION_JUMPEND)
 	{
 		//終了で待機に戻す
 		if(m_Motion.IsEndMotion())
@@ -178,6 +189,12 @@ void CPlayer::UpdateKey(void){
 	//SPACEキーで攻撃
 	if(g_pInput->IsKeyPush(MOFKEY_SPACE))
 	{
+		G_Cgame->addobject();
+		m_Motion.ChangeMotion(MOTION_ATTACK);
+		
+	}
+	else if (g_pInput->IsKeyPull(MOFKEY_SPACE)) {
+		G_Cgame->moveingsashiobject();
 		m_Motion.ChangeMotion(MOTION_ATTACK);
 	}
 }

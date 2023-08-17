@@ -25,5 +25,6 @@ public:
 	void Render(void);
 	void Release(void);
 	void addobject(void);
+	void moveingsashiobject(void);
 };
 

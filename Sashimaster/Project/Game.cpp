@@ -5,8 +5,7 @@
 CGame* G_Cgame;
 CGame::CGame() :CSceneBase(), pfont()
 {
-	G_Cgame = this;
-	addobject();
+	G_Cgame = this;	
 }
 
 bool CGame::Load()
@@ -84,5 +83,16 @@ void CGame::Release()
 }
 void CGame::addobject() {
 	auto aa = new ObjectDeta();
+	aa->m_MoveX = 1;
+	aa->m_MoveY = 1;
+	aa->m_rot = atan(aa->m_MoveY / aa->m_MoveX);
+	aa->m_objmode = getplayer;
+
 	m_Sashiobj.AddObject(aa);
 }
+//サシを追加するメソッド
+
+void CGame::moveingsashiobject() {
+	m_Sashiobj.moveingsashiobject();
+}
+//サシのモードを切り替えるメソッド

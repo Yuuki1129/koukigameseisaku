@@ -20,4 +20,5 @@ public:
 	 void Update(void);
 	 void Render(float wx, float wy);
 	 void AddObject(ObjectDeta* tmpobjdeta);
+	 void  moveingsashiobject(void);
 };

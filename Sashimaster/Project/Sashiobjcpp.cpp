@@ -4,19 +4,35 @@
 extern CGame* G_Cgame;
 void  CSashiobj::Initialize() {
 	for (int i = 0; objDetavector.size() > i; i++) {
-		objDetavector[i]->m_rot = MOF_MATH_HALFPI;
+		objDetavector[i]->m_MoveX = 1;
+		objDetavector[i]->m_MoveY = 1;
+		objDetavector[i]->m_rot = atan(objDetavector[i]->m_MoveY / objDetavector[i]->m_MoveX);
+		objDetavector[i]->m_objmode = getplayer;
 	}
 	
 }
+//あんまりいらない初期化（多分）
+
 void  CSashiobj::Update() {
 	for (int i = 0; objDetavector.size() > i; i++) {
-		objDetavector[i]->m_PosX += objDetavector[i]->m_MoveX;
-
-		objDetavector[i]->m_PosY += objDetavector[i]->m_MoveY;
-		Vector2 tmpvec2 = G_Cgame->getplayerpositon();
+		switch (objDetavector[i]->m_objmode)
+		{
+		case getplayer:
+		{Vector2 tmpvec2 = G_Cgame->getplayerpositon();
 		objDetavector[i]->m_PosX = tmpvec2.x;
-		objDetavector[i]->m_PosY = tmpvec2.y;
-		objDetavector[i]->m_rot+=0.01f;
+		objDetavector[i]->m_PosY = tmpvec2.y; }
+			//objDetavector[i]->m_rot+=0.01f;			
+		case moving:
+		{objDetavector[i]->m_PosX += objDetavector[i]->m_MoveX;
+		objDetavector[i]->m_PosY += objDetavector[i]->m_MoveY; }			
+		case idle:			
+		case noRender:			
+		default:	
+			break;
+		}
+
+		
+	
 	}
 
 	
@@ -54,3 +70,13 @@ void  CSashiobj::Render(float wx, float wy) {
 void CSashiobj::AddObject(ObjectDeta* tmpdeta) {
 	objDetavector.push_back(tmpdeta);
 }
+//サシを追加するメソッド
+void  CSashiobj::moveingsashiobject() {
+	for (int i = 0; objDetavector.size() > i; i++) {
+		if (objDetavector[i]->m_objmode == getplayer) {
+			objDetavector[i]->m_objmode = moving;
+		}
+
+	}
+}
+//サシを動かす状態にするメソッド
